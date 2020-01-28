@@ -28,6 +28,9 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if user.update(user_params)
       render json: { status: 200, msg: 'User details have been updated.' }
+    else
+      render json: { status: 200, msg: 'User details have NOT been updated.' }
+
     end
   end
   
@@ -43,7 +46,7 @@ class UsersController < ApplicationController
   
   # Setting up strict parameters for when we add account creation.
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:role, :username, :email, :password, :password_confirmation)
   end
   
   # Adding a method to check if current_user can update itself. 
